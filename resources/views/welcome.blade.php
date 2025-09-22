@@ -17,7 +17,7 @@
     <body>
         <h1>Знакомство с Laraevel</h1>
 
-        <a href="{{ route('second') }}">Вторая страница</a>
+        <a href="/second">Вторая страница</a>
         <a href="/third">Третья страница</a>
 
         <div class="container">
