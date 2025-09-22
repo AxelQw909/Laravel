@@ -1,1 +1,4 @@
-console.log("hello")
+import.meta.glob([
+  '../img/**',
+  '../fonts/**',
+]);

@@ -16,5 +16,24 @@
     </head>
     <body>
         <h1>Знакомство с Laraevel</h1>
+
+        <a href="{{ route('second') }}">Вторая страница</a>
+        <a href="/third">Третья страница</a>
+
+        <div class="container">
+
+            @for ($i = 1; $i < 13; $i++)
+
+                <div class="card">
+                    <img src="{{ Vite::asset('resources/img/cats-'.$i.'.jpg') }}">
+                    <h2>Товаря {{$i}}</h2>
+                    <p>Описание товара</p>
+                    @if($i %2 == 0)
+                        <p class="new">Новинка</p>
+                    @endif
+                </div>
+            @endfor
+
+        </div>
     </body>
 </html>
