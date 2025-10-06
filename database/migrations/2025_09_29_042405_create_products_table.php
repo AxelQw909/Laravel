@@ -13,8 +13,19 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('descripshion')->nullable();
+            $table->float('prise')->default(0);
+            $table->string('amount')->default(0);
+            $table->foreignId('category_id')
+                ->nullable()
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
             $table->timestamps();
         });
+
+       
     }
 
     /**

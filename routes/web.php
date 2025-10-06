@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\TestCase;
@@ -19,3 +20,19 @@ Route::get('/home', function () {
 
 Route::get('/home', [MainController::class, 'showIndex']) ->name('home');
 Route::get('/array', [MainController::class, 'showArray']) ->name('array');
+
+/*---------------------крут операции----------------------*/
+Route::get('/products', [ProductController::class,'index'])
+->name('products.index');
+
+Route::get('/products/create', [ProductController::class,'create'])
+->name('products.create');
+
+Route::post('/products',[ProductController::class,'store'])
+->name('products.store');
+
+Route::get('/products/{product}',[ProductController::class,'show'] )
+->name('products.show');
+
+Route::delete('/products/{product}',[ProductController::class,'destroy'])
+->name('products.destroy');
