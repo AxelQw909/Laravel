@@ -3,6 +3,7 @@
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\TestCase;
 
@@ -33,6 +34,10 @@ Route::post('/products',[ProductController::class,'store'])
 
 Route::get('/products/{product}',[ProductController::class,'show'] )
 ->name('products.show');
+
+Route::get('/products/{product}/edit',[ProductController::class,'edit'])->name('products.edit');
+
+Route::put('/products/{product}',[ProductController::class,'update'])->name('products.update');
 
 Route::delete('/products/{product}',[ProductController::class,'destroy'])
 ->name('products.destroy');
