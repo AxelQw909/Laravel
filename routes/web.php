@@ -1,29 +1,20 @@
 <?php
 
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\TestController;
-use App\Models\Product;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use PHPUnit\Framework\TestCase;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/second', [TestController::class, "second"])->name('second');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/third', ) ->name('third');
+Route::middleware('auth')->group(function () {
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
-
-Route::get('/home', [MainController::class, 'showIndex']) ->name('home');
-Route::get('/array', [MainController::class, 'showArray']) ->name('array');
-
-/*---------------------крут операции----------------------*/
-Route::get('/products', [ProductController::class,'index'])
+    Route::get('/products', [ProductController::class,'index'])
 ->name('products.index');
 
 Route::get('/products/create', [ProductController::class,'create'])
@@ -41,3 +32,24 @@ Route::put('/products/{product}',[ProductController::class,'update'])->name('pro
 
 Route::delete('/products/{product}',[ProductController::class,'destroy'])
 ->name('products.destroy');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+Route::get('/second', [TestController::class, "second"])->name('second');
+
+Route::get('/third', ) ->name('third');
+
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
+
+Route::get('/home', [MainController::class, 'showIndex']) ->name('home');
+Route::get('/array', [MainController::class, 'showArray']) ->name('array');
+
+/*---------------------крут операции----------------------*/
+
+require __DIR__.'/auth.php';

@@ -9,29 +9,49 @@
 <body>
     <header>
         <h1>Каталог товаров</h1>
+        <p>{{$buyer->user->name}}</p>
+        <p>{{$buyer->address}}</p>
     </header>
     <main>
 
     <a href="{{route('products.create')}}">Создание товара</a>
-        <div class="container">
-            @foreach($products as $product)
-                <div class="card">
-                    <h1>
-                        <a href="{{route('products.show',$product->id)}}">{{$product -> name}}</a>
-                    </h1>
-                    <p>{{$product -> prise}}</p>
-                    <p>{{$product -> descripshion}}</p>
+        <div class="container1">
+            @foreach($categories as $category)
 
-                    <form method="POST" action="{{route('products.destroy',$product->id)}}">
-                        @csrf
-                        @method('delete')
-                        <input type="submit" value="Удалить">
-                    </form>
-                        <a href="{{route('products.edit',$product->id)}}"> Редактировать</a>
+                <h2>{{$category->name}}</h2>
+                 
 
-                    <hr>
-                </div>
+                    @foreach($category->products as $product)
+                        <div class="card">
+                            <h1>
+                                <a href="{{route('products.show',$product->id)}}">{{$product -> name}}</a>
+                            </h1>
+                            <p>{{$product -> prise}}</p>
+                            <p>{{$product -> descripshion}}</p>
+                            <p>{{$product -> category -> name}}</p>
+                            <div>
+                                @foreach($product->features as $feature)
+                                    <p>
+                                        {{$feature->name}} -
+                                        {{$feature->pivot->value}} - 
+                                        {{$feature->unit}}
+                                    </p>
+                                @endforeach
+                            </div>
+
+                            <form method="POST" action="{{route('products.destroy',$product->id)}}">
+                                @csrf
+                                @method('delete')
+                                <input type="submit" value="Удалить">
+                            </form>
+                                <a href="{{route('products.edit',$product->id)}}"> Редактировать</a>
+
+                            <hr>
+                        </div>
+                    @endforeach
             @endforeach
+
+            
         </div>
     </main>
 </body>
